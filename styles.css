@@ -21,11 +21,16 @@ body {
 
 /* Futuristic animated background */
 .intro-bg {
+  position: relative;
   background:
-    radial-gradient(circle at 20% 20%, rgba(34,211,238,0.35), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(99,102,241,0.35), transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(34,211,238,0.45), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(99,102,241,0.45), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(14,165,233,0.35), transparent 40%),
     linear-gradient(135deg, #020617, #050a1f);
+  animation: bgMove 18s infinite alternate ease-in-out;
+  overflow: hidden;
 }
+
 
 /* Grid overlay for AI look */
 .intro-bg::before {
@@ -33,21 +38,28 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
   background-size: 40px 40px;
+  animation: gridScroll 20s linear infinite;
   z-index: 0;
 }
+
 
 /* Glow animation */
 .intro-bg::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(34,211,238,0.25), transparent 60%);
-  animation: pulseGlow 6s infinite alternate;
+  inset: -20%;
+  background:
+    radial-gradient(circle, rgba(34,211,238,0.15) 2px, transparent 3px),
+    radial-gradient(circle, rgba(99,102,241,0.15) 2px, transparent 3px),
+    radial-gradient(circle, rgba(14,165,233,0.15) 2px, transparent 3px);
+  background-size: 120px 120px;
+  animation: particlesFloat 30s linear infinite;
   z-index: 0;
 }
+
 
 /* Keep content above background */
 .hero * {
@@ -191,3 +203,39 @@ footer {
     height: 110px;
   }
 }
+@keyframes bgMove {
+  0% {
+    background-position:
+      20% 20%,
+      80% 30%,
+      50% 80%,
+      0% 0%;
+  }
+  100% {
+    background-position:
+      30% 40%,
+      70% 20%,
+      60% 60%,
+      100% 100%;
+  }
+}
+
+@keyframes gridScroll {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 80px, 80px 0;
+  }
+}
+
+@keyframes particlesFloat {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-200px);
+  }
+}
+
+
